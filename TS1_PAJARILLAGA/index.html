@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pajarillaga Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #FFC1CC, #2e131c);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: #000000;
+        }
+        .resume {
+            width: 800px;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+        }
+        .resume:hover {
+            box-shadow: 0px 0px 20px rgba(255, 182, 193, 0.8);
+        }
+        .change-color-btn {
+            margin-top: 20px;
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .change-color-btn:hover {
+            background-color: #FF1493;
+        }
+        .paja_profile_pic img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0px 0px 5px rgba(255, 20, 147, 0.5);
+            border: 3px solid #FF1493;
+        }
+        .paja_namerole {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #FF1493;
+        }
+        .paja_info {
+            text-align: left;
+            background: none;
+            padding: 5px 0;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            line-height: 1.6; 
+            color: #000;
+            font-family: 'Poppins', sans-serif;
+            border-top: 3px solid #FF69B4;
+        }
+        .paja_aboutme {
+             margin-top: -30px;
+        }
+        .resume_left {
+            background: #FFE4E1;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        h2 {
+            border-bottom: 3px solid #FF69B4;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            color: #FF1493;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume" id="resume">
+        <div class="resume_left">
+            <div class="resume_header">
+                <div class="paja_profile_pic">
+                    <img src="paja.jpg" alt="profile_pic">
+                </div>
+                <div class="paja_namerole">
+                    <p>Nicole C. Pajarillaga</p>
+                </div>
+                <div class="paja_info">
+                    <h2>Contact Information</h2>
+                    <p>Email: pajarillagan@gmail.com</p>
+                    <p>Phone: 09524833536</p>
+                </div>
+            </div>
+            <div class="paja_aboutme">
+                <h2>About Me</h2>
+                <p>"A dedicated and motivated BSITWMA student with a passion for web development and programming. Always eager to learn new skills and contribute to innovative projects."
+                </p>
+            </div>
+            <div class="paja_skills">
+                <h2>Skills</h2>
+                <ul>
+                    <li>HTML, CSS, and JavaScript</li>
+                    <li>C++ Programming Basics</li>
+                    <li>Object-Oriented Programming</li>
+                    <li>Data Structures & Algorithms</li>
+                    <li>Creative Writing</li>
+                </ul>
+            </div>
+            <div class="paja_education">
+                <h2>Educational Background</h2>
+                <ul>
+                    <li>Senior High School - University of the East - 2022-2023 </li>
+                    <li>1st Year - FEU Institute of Technology - 2023-2024</li>
+                    <li>2nd Year - FEU Institute of Technology - 2023-2024</li>
+                </ul>
+            </div>
+            <div class="paja_projects">
+                <h2>Projects</h2>
+                <ul>
+                    <li>Hotel Management System using Data Structure</li>
+                    <li>Banking System using C++ Programming</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <button class="change-color-btn" onclick="changeColor()">Change Resume Color</button>
+    <script>
+        function changeColor() {
+            const colors = ['#FFD700', '#A020F0', '	#008000', '#808080', '#ADD8E6'];
+            const resume = document.getElementById('resume');
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            resume.style.backgroundColor = randomColor;
+        }
+    </script>
+</body>
+</html>
