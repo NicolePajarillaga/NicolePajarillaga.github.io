@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAJARILLAGA-TSA2</title>
+    <style>
+      body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background: linear-gradient(to bottom, #ffffff, #ffffff);
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .paja-container {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+      }
+      .paja-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      button {
+        padding: 30px 15px;
+        font-size: 20px;
+        border: 2px solid black;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .paja-box-container {
+        width: 600px;
+        height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border: 20px solid transparent;
+      }
+      .paja-box {
+        width: 350px;
+        height: 350px;
+        position: absolute;
+        background-color: white;
+        display: none;
+        transition: transform 0.5s ease, background-color 0.5s ease,
+          opacity 0.5s ease;
+        box-shadow: 0 0 0 20px var(--border-color);
+        opacity: 0;
+      }
+      .monday {
+        background-color: purple;
+        color: white;
+      }
+      .tuesday {
+        background-color: pink;
+      }
+      .wednesday {
+        background-color: blue;
+        color: white;
+      }
+      .thursday {
+        background-color: green;
+        color: white;
+      }
+      .friday {
+        background-color: yellow;
+      }
+      .saturday {
+        background-color: orange;
+      }
+      .sunday {
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="paja-container">
+      <div class="paja-buttons">
+        <button class="monday" onclick="pajaBox('Monday', 'purple')">
+          Monday
+        </button>
+        <button class="tuesday" onclick="pajaBox('Tuesday', 'pink')">
+          Tuesday
+        </button>
+        <button class="wednesday" onclick="pajaBox('Wednesday', 'blue')">
+          Wednesday
+        </button>
+        <button class="thursday" onclick="pajaBox('Thursday', 'green')">
+          Thursday
+        </button>
+        <button class="friday" onclick="pajaBox('Friday', 'yellow')">
+          Friday
+        </button>
+        <button class="saturday" onclick="pajaBox('Saturday', 'orange')">
+          Saturday
+        </button>
+        <button class="sunday" onclick="pajaBox('Sunday', 'red')">
+          Sunday
+        </button>
+      </div>
+      <div class="paja-box-container">
+        <div id="paja-box" class="paja-box"></div>
+      </div>
+    </div>
+    <script>
+      let pajaCurrent = null;
+      function pajaBox(pajaDay, pajaColor) {
+        let pajaBox = document.getElementById("paja-box");
+
+        if (pajaCurrent) {
+          pajaBox.style.opacity = "0";
+          pajaBox.style.transform = "translateY(-50px)";
+          setTimeout(() => {
+            pajaBox.style.display = "none";
+            pajaShowBox(pajaDay, pajaColor);
+          }, 500);
+        } else {
+          pajaShowBox(pajaDay, pajaColor);
+        }
+      }
+
+      function pajaShowBox(pajaDay, pajaColor) {
+        let pajaBox = document.getElementById("paja-box");
+        pajaCurrent = pajaDay;
+        pajaBox.style.display = "block";
+        pajaBox.style.setProperty("--border-color", pajaColor);
+        setTimeout(() => {
+          pajaBox.style.opacity = "1";
+          pajaBox.style.transform = "translateY(0px)";
+        }, 50);
+      }
+    </script>
+  </body>
+</html>
