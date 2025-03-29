@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSA3_Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #EEBBD5, #2F284E);
+        }
+        .calculator_body {
+            width: 220px;
+            background: #3A1C71;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow:#00000033;
+        }
+        .calculator_screen {
+            width: 95%;
+            height: 50px;
+            text-align: left;
+            font-size: 20px;
+            margin-bottom: 15px;
+            background: #EAEAEA;
+            color: #333;
+        }
+        button {
+            padding: 10px;
+            font-size: 20px;
+            border: none;
+            background: #8E44AD;
+            cursor: grab;
+            border-radius: 10px;
+            color: white;
+        } 
+        .calculator_buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 5px;
+        }
+        .calculator_operator {
+            background: #0f0f0e;
+            color: white;
+        }
+        .calculator_equal {
+            grid-row: span 2;
+        }
+        .calculator_zero {
+            grid-column: span 2;
+        }
+        button:hover {
+            background: #9B59B6;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="calculator_body">
+        <input type="text" class="calculator_screen" id="calculator_screen" disabled>
+        <div class="calculator_buttons">
+            <button class="calculator_operator" onclick="clearDisplay()">C</button>
+            <button class="calculator_operator" delLast()">&lt;</button>
+            <button class="calculator_operator" onclick="append('/')">/</button>
+            <button class="calculator_operator" onclick="append('*')">×</button>
+            <button onclick="append('7')">7</button>
+            <button onclick="append('8')">8</button>
+            <button onclick="append('9')">9</button>
+            <button class="calculator_operator" onclick="append('-')">-</button>
+            <button onclick="append('4')">4</button>
+            <button onclick="append('5')">5</button>
+            <button onclick="append('6')">6</button>
+            <button class="calculator_operator" onclick="append('+')">+</button>
+            <button onclick="append('1')">1</button>
+            <button onclick="append('2')">2</button>
+            <button onclick="append('3')">3</button>
+            <button class="calculator_equal" onclick="calculate()">=</button>
+            <button class="calculator_zero" onclick="append('0')">0</button>
+            <button onclick="append('.')">.</button>
+        </div>
+    </div>
+
+    <script>
+        function append(val) {
+            document.getElementById("calculator_screen").value += val;
+        }
+        function clearDisplay() {
+            document.getElementById("calculator_screen").value = "";
+        }
+        function delLast() {
+            let d = document.getElementById("calculator_screen");
+            d.value = d.value.slice(0, -1);
+        }
+        function calculate() {
+            try {
+                document.getElementById("calculator_screen").value = eval(document.getElementById("calculator_screen").value);
+            } catch {
+                alert("Error");
+            }
+        }
+        
+    </script>
+</body>
+</html>
