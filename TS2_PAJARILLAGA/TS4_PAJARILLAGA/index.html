@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filipino Cuisine</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://t3.ftcdn.net/jpg/10/05/19/04/240_F_1005190455_b5CLTGyaPwYDfsfOrKuFvV3irnVyPKNz.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #333;
+      text-align: center;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      background-color: rgba(255, 87, 34, 0.9);
+      padding: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .navbar span {
+      text-shadow: 2px 2px 5px black;
+      font-style: italic;
+    }
+    .navbar span:nth-child(1) {
+      color: yellow;
+    }
+    .navbar span:nth-child(2) {
+      color: cyan;
+    }
+
+    /* Dish Cards */
+    .dishes-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .dish-card {
+      background-color: white;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .dish-card:hover {
+      transform: scale(1.05);
+    }
+
+    .dish-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    /* Popup Styles */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .popup-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .popup-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+    }
+
+    .popup-content img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .popup-content h2 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: #ff5722;
+    }
+
+    .popup-content p {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .main-menu-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ff5722;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <span>Filipino</span>
+    <span>Cuisine</span>
+  </div>
+
+  <!-- Dish Cards -->
+  <div class="dishes-container">
+    <div class="dish-card" onclick="openPopup('adobo')">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfOARnz6aZQD82qqQA4FP4S5ZK1f-tAfqLaA&s" alt="Adobo">
+      <h3>Adobo</h3>
+      <p>A savory and tangy Filipino classic.</p>
+    </div>
+    <div class="dish-card" onclick="openPopup('sinigang')">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIw1QI1eLYaY5fqZqFonhj4mFgMnxNJhUO3w&s" alt="Sinigang">
+      <h3>Sinigang</h3>
+      <p>A sour soup that warms the soul.</p>
+    </div>
+    <div class="dish-card" onclick="openPopup('lechon')">
+      <img src="https://www.seriouseats.com/thmb/5Ox6xAbx0ZhDR3AINATmI3KXTec=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2012__05__20120522-207501-lechon-liempo-2-b5dc970333914a13add4ee48326aea13.jpg" alt="Lechon">
+      <h3>Lechon</h3>
+      <p>The star of every Filipino celebration.</p>
+    </div>
+    <div class="dish-card" onclick="openPopup('halo-halo')">
+      <img src="https://t4.ftcdn.net/jpg/13/08/65/45/360_F_1308654517_6jBsVqTiBx3UHhI0AGbVPf4ibaVQSQTD.jpg" alt="Halo-Halo">
+      <h3>Halo-Halo</h3>
+      <p>A colorful dessert to cool you down.</p>
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <div id="popup" class="popup-overlay">
+    <div class="popup-content">
+      <h2 id="popup-title"></h2>
+      <img id="popup-image" src="" alt="">
+      <p id="popup-description"></p>
+      <button class="main-menu-btn" onclick="closePopup()">Main Menu</button>
+    </div>
+  </div>
+
+  <script>
+    const dishes = {
+      adobo: {
+        title: "Adobo",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfOARnz6aZQD82qqQA4FP4S5ZK1f-tAfqLaA&s",
+        description: "Adobo is a popular Filipino dish made with meat, vinegar, soy sauce, garlic, and spices. It is savory, tangy, and delicious."
+      },
+      sinigang: {
+        title: "Sinigang",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIw1QI1eLYaY5fqZqFonhj4mFgMnxNJhUO3w&s",
+        description: "Sinigang is a sour soup made with tamarind, vegetables, and meat or seafood. It is a comforting and flavorful dish."
+      },
+      lechon: {
+        title: "Lechon",
+        image: "https://www.seriouseats.com/thmb/5Ox6xAbx0ZhDR3AINATmI3KXTec=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2012__05__20120522-207501-lechon-liempo-2-b5dc970333914a13add4ee48326aea13.jpg",
+        description: "Lechon is a whole roasted pig, known for its crispy skin and tender meat."
+      },
+      "halo-halo": {
+        title: "Halo-Halo",
+        image: "https://t4.ftcdn.net/jpg/13/08/65/45/360_F_1308654517_6jBsVqTiBx3UHhI0AGbVPf4ibaVQSQTD.jpg",
+        description: "Halo-Halo is a popular Filipino dessert made with crushed ice, sweetened fruits, and milk."
+      }
+    };
+
+    function openPopup(dishKey) {
+      const dish = dishes[dishKey];
+      document.getElementById("popup-title").innerText = dish.title;
+      document.getElementById("popup-image").src = dish.image;
+      document.getElementById("popup-description").innerText = dish.description;
+      document.getElementById("popup").classList.add("active");
+    }
+
+    function closePopup() {
+      document.getElementById("popup").classList.remove("active");
+    }
+  </script>
+</body>
+</html>
